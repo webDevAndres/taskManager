@@ -14,14 +14,17 @@ var displayTaskList = function(){
             tasks = storage.split("|");
         }
     }
-    // if there are tasks in the array, sort and create tasks string
+    // if there are tasks in the array, sort and create a capitalized tasks string
     if (tasks.length > 0) {
-        tasks.sort();
-        list = tasks.join("\n");
+        var capitalized = tasks.sort().map(function(value){
+            var first = value.substring(0,1); // get first letter
+            var remaining = value.substring(1); //get remaining letters
+            return first.toUpperCase() + remaining;
+        });
     }
 
     // display the tasks string and set focus on the task text box
-    $("task_list").value = list;
+    $("task_list").value = capitalized && capitalized.join("\n") || "";
     $("task").focus();
 };
 var addToTaskList = function() {
@@ -41,8 +44,7 @@ var addToTaskList = function() {
 var clearTaskList = function(){
     tasks.length = 0;
     localStorage.tasks = "";
-    $("task_list").value = "";
-    $("task").focus();
+    displayTaskList();
 };
 
 window.onload = function() {
