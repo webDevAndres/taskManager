@@ -36,7 +36,7 @@ var displayTaskList = function () {
 
     //display name if there is one in session storage
     var setName = sessionStorage.firstName || "";
-    $("name").firstChild.nodeValue = setName.length === 0 ? "" : setName + "'s " + " List";
+    $("name").firstChild.nodeValue = setName.length === 0 ? "" : setName + "'s " + "List";
 };
 var addToTaskList = function () {
     var task = $("task");
