@@ -18,7 +18,7 @@ var displayTaskList = function () {
     }
     // if there are tasks in the array, sort and create a capitalized tasks string
     if (tasks.length > 0) {
-        if(sortDirection === "ASC"){
+        if (sortDirection === "ASC") {
             tasks.sort();
         } else {
             tasks.reverse();
@@ -33,6 +33,10 @@ var displayTaskList = function () {
     // display the tasks string and set focus on the task text box
     $("task_list").value = capitalized && capitalized.join("\n") || "";
     $("task").focus();
+
+    //display name if there is one in session storage
+    var setName = sessionStorage.firstName || "";
+    $("name").firstChild.nodeValue = setName.length === 0 ? "" : setName + "'s " + "List";
 };
 var addToTaskList = function () {
     var task = $("task");
@@ -64,14 +68,22 @@ var deleteTask = function () {
 
 };
 
-var toggleSort = function() {
-   sortDirection = (sortDirection == "ASC") ? "DESC" : "ASC";
-   displayTaskList();
+var toggleSort = function () {
+    sortDirection = (sortDirection == "ASC") ? "DESC" : "ASC";
+    displayTaskList();
 };
+
+var setName = function () {
+    var name = prompt("Please enter a name");
+    sessionStorage.setItem("firstName", name);
+    displayTaskList();
+};
+
 window.onload = function () {
     $("add_task").onclick = addToTaskList;
     $("clear_tasks").onclick = clearTaskList;
     $("delete_task").onclick = deleteTask;
     $("toggle_sort").onclick = toggleSort;
+    $("set_name").onclick = setName;
     displayTaskList();
 };
