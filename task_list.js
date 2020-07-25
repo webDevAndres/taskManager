@@ -68,7 +68,6 @@ var toggleSort = function() {
    sortDirection = (sortDirection == "ASC") ? "DESC" : "ASC";
    displayTaskList();
 };
-
 window.onload = function () {
     $("add_task").onclick = addToTaskList;
     $("clear_tasks").onclick = clearTaskList;
