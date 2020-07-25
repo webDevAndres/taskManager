@@ -2,6 +2,7 @@ var $ = function (id) {
     return document.getElementById(id);
 };
 var tasks = [];
+var sortDirection = "ASC";
 
 
 var displayTaskList = function () {
@@ -17,7 +18,12 @@ var displayTaskList = function () {
     }
     // if there are tasks in the array, sort and create a capitalized tasks string
     if (tasks.length > 0) {
-        var capitalized = tasks.sort().map(function (value) {
+        if(sortDirection === "ASC"){
+            tasks.sort();
+        } else {
+            tasks.reverse();
+        }
+        var capitalized = tasks.map(function (value) {
             var first = value.substring(0, 1); // get first letter
             var remaining = value.substring(1); //get remaining letters
             return first.toUpperCase() + remaining;
@@ -58,9 +64,14 @@ var deleteTask = function () {
 
 };
 
+var toggleSort = function() {
+   sortDirection = (sortDirection == "ASC") ? "DESC" : "ASC";
+   displayTaskList();
+};
 window.onload = function () {
     $("add_task").onclick = addToTaskList;
     $("clear_tasks").onclick = clearTaskList;
     $("delete_task").onclick = deleteTask;
+    $("toggle_sort").onclick = toggleSort;
     displayTaskList();
 };
