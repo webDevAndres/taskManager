@@ -79,11 +79,23 @@ var setName = function () {
     displayTaskList();
 };
 
+var importantTasks = function(element) {
+    var lower = element.toLowerCase();
+    var index = lower.indexOf("important!");
+    return index > -1;
+};
+
+var filterTasks = function() {
+    var filtered = tasks.filter(importantTasks);
+    $("task_list").value = filtered.join("\n");
+};
+
 window.onload = function () {
     $("add_task").onclick = addToTaskList;
     $("clear_tasks").onclick = clearTaskList;
     $("delete_task").onclick = deleteTask;
     $("toggle_sort").onclick = toggleSort;
     $("set_name").onclick = setName;
+    $("filter_tasks").onclick = filterTasks;
     displayTaskList();
 };
