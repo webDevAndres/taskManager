@@ -1,12 +1,12 @@
+"use strict";
+
 var $ = function (id) {
     return document.getElementById(id);
 };
 var tasks = [];
 var sortDirection = "ASC";
 
-
 var displayTaskList = function () {
-    var list = "";
     if (tasks.length === 0) {
         // get tasks from storage or empty string if nothing is in storage
         var storage = localStorage.getItem("tasks") || "";
@@ -79,13 +79,13 @@ var setName = function () {
     displayTaskList();
 };
 
-var importantTasks = function(element) {
+var importantTasks = function (element) {
     var lower = element.toLowerCase();
     var index = lower.indexOf("important!");
     return index > -1;
 };
 
-var filterTasks = function() {
+var filterTasks = function () {
     var filtered = tasks.filter(importantTasks);
     $("task_list").value = filtered.join("\n");
 };
