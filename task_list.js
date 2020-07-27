@@ -26,7 +26,7 @@ var displayTaskList = function () {
         var capitalized = tasks.map(function (value) {
             var first = value.substring(0, 1); // get first letter
             var remaining = value.substring(1); //get remaining letters
-            return first.toUpperCase() + remaining;
+            return first.toUpperCase() + remaining; //capitalize the first letter and join the remaining letters.
         });
     }
 
@@ -60,7 +60,7 @@ var clearTaskList = function () {
 
 var deleteTask = function () {
     var index = parseInt(prompt("Please enter the index of the task"));
-    if (!isNaN(index) || index === "") {
+    if (!isNaN(index)) {
         tasks.splice(index, 1);
         localStorage.tasks = tasks.join("|");
         displayTaskList();
